@@ -1,5 +1,5 @@
 import express from 'express';
-
+import {body , validationResult} from 'express-validator';
 const router = express.Router(); // ini router
 
 //GET alle teams 
@@ -13,7 +13,21 @@ router.get('/', async (req,res)=>{
     }
 });
 //POST een team in de db
-router.post('/', async(req,res)=>{
+router.post('/',
+ // Validatie regels
+ [
+    body('teamName').notEmpty().withMessage('Team name is required'),
+    body('coach').notEmpty().withMessage('Coach is required'),
+    body('location').notEmpty().withMessage('Location is required'),
+    body('wins').isNumeric().withMessage('Wins must be a number'),
+    body('loses').isNumeric().withMessage('Loses must be a number'),
+  ],
+async(req,res)=>{
+    //checkt of er errors zijn
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
     const{teamName, coach , location, wins, loses} = req.body;
 
     try{
@@ -32,8 +46,23 @@ router.post('/', async(req,res)=>{
 
 
 //PUT update een team in de db
-router.put('/:id', async (req, res) => {
-    const { teamName, coach, location, players, wins, loses } = req.body;
+router.put('/:id',
+
+    // Validatie regels
+[
+    body('teamName').notEmpty().withMessage('Team name is required'),
+    body('coach').notEmpty().withMessage('Coach is required'),
+    body('location').notEmpty().withMessage('Location is required'),
+    body('wins').isNumeric().withMessage('Wins must be a number'),
+    body('loses').isNumeric().withMessage('Loses must be a number'),
+  ],
+async (req, res) => {
+     //checkt of er errors zijn
+     const errors = validationResult(req);
+     if (!errors.isEmpty()) {
+       return res.status(400).json({ errors: errors.array() });
+     }
+     const{teamName, coach , location, wins, loses} = req.body;
 
     try {
         await req.mysql.execute(

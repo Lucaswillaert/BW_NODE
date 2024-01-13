@@ -15,8 +15,26 @@ router.get('/', async (req, res) => {
     }
   });
 //POST EEN PLAYER IN DE DB 
-router.post('/', async(req,res)=>{
- const { 
+router.post('/', 
+   // Validatie regels 
+   [
+    body('voornaam').notEmpty().withMessage('First name is required'),
+    body('achternaam').notEmpty().withMessage('Last name is required'),
+    body('Team').notEmpty().withMessage('Team is required'),
+    body('geboortedatum').notEmpty().withMessage('Birthdate is required'),
+    body('ppg').isNumeric().withMessage('PPG must be a number'),
+    body('apg').isNumeric().withMessage('APG must be a number'),
+    body('rpg').isNumeric().withMessage('RPG must be a number'),
+    body('minpg').isNumeric().withMessage('MINPG must be a number'),
+  ],
+    async(req,res)=>{
+         // Check for validation errors
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { 
         voornaam = null, 
         achternaam = null, 
         Team = null, 
@@ -44,7 +62,24 @@ router.post('/', async(req,res)=>{
 })
 
 // PUT UPDATE EEN PLAYER IN DE DB
-router.put('/:id', async(req,res)=>{
+router.put('/:id', 
+  // Validatie regels
+  [
+    body('voornaam').notEmpty().withMessage('First name is required'),
+    body('achternaam').notEmpty().withMessage('Last name is required'),
+    body('geboortedatum').notEmpty().withMessage('Birthdate is required'),
+    body('ppg').isNumeric().withMessage('PPG must be a number'),
+    body('apg').isNumeric().withMessage('APG must be a number'),
+    body('rpg').isNumeric().withMessage('RPG must be a number'),
+    body('minpg').isNumeric().withMessage('MINPG must be a number'),
+  ],
+  async(req,res)=>{
+    // Check vooe validatie errors
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     const { voornaam, achternaam, geboortedatum, ppg, apg, rpg, minpg } = req.body;
     try{
         await req.mysql.execute('UPDATE `players` SET `voornaam`=?, `achternaam`=?, `geboortedatum`=?, `ppg`=?, `apg`=?, `rpg`=?, `minpg`=? WHERE `id`=?',
