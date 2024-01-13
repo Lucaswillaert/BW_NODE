@@ -1,5 +1,5 @@
 import express from 'express';
-const mysql = require('mysql');
+
 import bodyParser from 'body-parser'; //body-parser is a piece of express middleware that reads a form's input and stores it as a javascript object accessible through req.body
 
 const app = express(); // Create express app
@@ -16,7 +16,6 @@ app.listen(PORT, () => {
 
 // Routes
 // Create your models and routes here
-
 
     app.get('/hello' ,(req,res)=>{
         res.send('Hello World!');
