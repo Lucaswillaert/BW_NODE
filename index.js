@@ -6,14 +6,15 @@ import db from './database/database.js';
 const app = express(); // Create express app
 const PORT = 8080; // You can choose any available port
 
+
+
+
 // Middleware
 app.use(bodyParser.json()); //json parser voor data door te sturen 
 app.use((req, res , next)=>{
     req.mysql = db;
     next();
 })
-
-app.use('/players', playerRoutes); //zetten startingpad voor alle routes in de players.js
 
 // Start server met callback functie
 app.listen(PORT, () => {
@@ -23,10 +24,10 @@ app.listen(PORT, () => {
 
 // Routes
 // Create your models and routes here
-app.get('/' ,(req,res)=>{res.send('Hello World')});
+
+app.use('/players', playerRoutes); //zetten startingpad voor alle routes in de players.js
 
 
-    
-
-
-
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+  });
