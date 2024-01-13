@@ -15,6 +15,12 @@ app.use((req, res , next)=>{
     next();
 })
 
+// Set Content-Type for all responses
+app.use((req, res, next) => {
+    res.setHeader('Content-Type', 'application/json');
+    next();
+});
+
 // Start server met callback functie
 app.listen(PORT, () => {
     console.log(`Server is Running on http://localhost:${PORT}`);
