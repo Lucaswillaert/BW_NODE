@@ -4,8 +4,23 @@ const router = express.Router(); // ini router
 
 //GET alle teams 
 router.get('/', async (req,res)=>{
+   
     try {
-        const [rows]= await req.mysql.execute('SELECT * FROM teams');
+        const [rows]= await req.mysql.execute('SELECT * FROM teams ');
+        res.json(rows);
+    }catch(err){
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
+
+//GET alle teams met limit en offset
+router.get('/limit/:limit/offset/:offset', async (req,res)=>{
+    const limit = parseInt(req.params.limit);
+    const offset = parseInt(req.params.offset);
+    try {
+        const [rows]= await req.mysql.execute('SELECT * FROM teams LIMIT ? OFFSET ?',[limit,offset]);
         res.json(rows);
     }catch(err){
         console.error(err.message);
