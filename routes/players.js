@@ -15,6 +15,19 @@ router.get('/', async (req, res) => {
       res.status(500).send('Server Error');
     }
   });
+
+
+  //GET player door naam
+  router.get('/search/:voornaam', async (req, res) => {
+    const naam = req.params.naam;
+    try {
+        const [rows] = await req.mysql.execute('SELECT * FROM players WHERE voornaam = ?', [voornaam]);
+        res.json(rows);
+    } catch(err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
 //POST EEN PLAYER IN DE DB 
 router.post('/', 
    // Validatie regels 

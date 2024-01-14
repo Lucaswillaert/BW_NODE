@@ -1,0 +1,15 @@
+
+
+routes aanmaken voor database: 
+GET - /users vind alle users 
+POST - /users maak een user aan 
+GET - /users/:id vind user details 
+DELETE - /users/:id delete een user 
+PATCH - /users/:id update een user
+
+https://www.youtube.com/watch?v=l8WPWK9mS5M sources 
+
+
+!! node-modules in gitignore zetten 
+
+node-modules in de zip verwijderen bw_firstname_lastname_node.zip 
