@@ -19,10 +19,8 @@ Volg deze stappen om het project te installeren:
 3. **Clone het project van GitHub**: Open je terminal en voer het volgende commando uit om het project te klonen:
 
     ```bash
-    git clone https://github.com/yourusername/yourrepository.git
+    git clone https://github.com/Lucaswillaert/BW_NODE 
     ```
-
-    Vervang `yourusername` en `yourrepository` door je eigen GitHub gebruikersnaam en de naam van je repository.
 
 4. **Installeer de Node.js dependencies**: Navigeer naar de map van het project in je terminal en voer het volgende commando uit:
 
@@ -36,7 +34,7 @@ Om de API te starten, open je terminal, navigeer naar de map van het project en 
 
 ```bash
 npm start
-
+```
 ## Routes
 
 - `GET /teams`: Haalt alle teams op.
@@ -51,5 +49,5 @@ npm start
 - `PUT /players/:id`: Wijzigt een bestaande speler.
 - `DELETE /players/:id`: Verwijdert een speler.
 
-NOTE : ' er zijn nog routes voor advanced searching, zie Teams.js file 
+NOTE : Er zijn nog routes voor advanced searching, zie Teams.js file 
 
