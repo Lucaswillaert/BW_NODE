@@ -15,7 +15,7 @@ app.use((req, res , next)=>{
     next();
 })
 
-// Set Content-Type for all responses
+// Set Content-Type voor alle responses
 app.use((req, res, next) => {
     res.setHeader('Content-Type', 'application/json');
     next();
@@ -35,5 +35,5 @@ app.use('/teams',teamRoutes);
 
 
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.send('Hello!');
   });
