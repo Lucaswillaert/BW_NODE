@@ -1,15 +1,55 @@
+# Basketbal API
 
+Dit project is een API voor het beheren van basketbalteams en spelers en hun data erin te steken. Het is gebouwd met Node.js en MySQL.
 
-routes aanmaken voor database: 
-GET - /users vind alle users 
-POST - /users maak een user aan 
-GET - /users/:id vind user details 
-DELETE - /users/:id delete een user 
-PATCH - /users/:id update een user
+## Vereisten
 
-https://www.youtube.com/watch?v=l8WPWK9mS5M sources 
+- Node.js
+- MySQL
+- XAMPP
 
+## Installatie
 
-!! node-modules in gitignore zetten 
+Volg deze stappen om het project te installeren:
 
-node-modules in de zip verwijderen bw_firstname_lastname_node.zip 
+1. **Download en installeer Node.js**: Ga naar de [officiële Node.js website](https://nodejs.org/) en download de Node.js versie die geschikt is voor je besturingssysteem. Volg de installatie-instructies.
+
+2. **Download en installeer XAMPP**: Ga naar de [officiële XAMPP website](https://www.apachefriends.org/index.html) en download de XAMPP versie die geschikt is voor je besturingssysteem. Volg de installatie-instructies. Zorg ervoor dat je MySQL selecteert tijdens de installatie.
+
+3. **Clone het project van GitHub**: Open je terminal en voer het volgende commando uit om het project te klonen:
+
+    ```bash
+    git clone https://github.com/yourusername/yourrepository.git
+    ```
+
+    Vervang `yourusername` en `yourrepository` door je eigen GitHub gebruikersnaam en de naam van je repository.
+
+4. **Installeer de Node.js dependencies**: Navigeer naar de map van het project in je terminal en voer het volgende commando uit:
+
+    ```bash
+    npm install
+    ```
+
+## Gebruik
+
+Om de API te starten, open je terminal, navigeer naar de map van het project en voer het volgende commando uit:
+
+```bash
+npm start
+
+## Routes
+
+- `GET /teams`: Haalt alle teams op.
+- `GET /teams/:id`: Haalt een specifiek team op op basis van het ID.
+- `POST /teams`: Maakt een nieuw team aan.
+- `PUT /teams/:id`: Wijzigt een bestaand team.
+- `DELETE /teams/:id`: Verwijdert een team.
+
+- `GET /players`: Haalt alle spelers op.
+- `GET /players/:id`: Haalt een specifieke speler op op basis van het ID.
+- `POST /players`: Maakt een nieuwe speler aan.
+- `PUT /players/:id`: Wijzigt een bestaande speler.
+- `DELETE /players/:id`: Verwijdert een speler.
+
+NOTE : ' er zijn nog routes voor advanced searching, zie Teams.js file 
+
