@@ -4,7 +4,6 @@ import { body, validationResult } from 'express-validator';
 const router = express.Router(); // ini router
 
 //alle routes hier starten met /players
-
 //GET ALLE PLAYERS
 router.get('/', async (req, res) => {
     try {
@@ -17,9 +16,9 @@ router.get('/', async (req, res) => {
   });
 
 
-  //GET player door naam
+  //GET player door naam - returning values 
   router.get('/search/:voornaam', async (req, res) => {
-    const naam = req.params.naam;
+    const voornaam = req.params.voornaam;
     try {
         const [rows] = await req.mysql.execute('SELECT * FROM players WHERE voornaam = ?', [voornaam]);
         res.json(rows);
@@ -28,6 +27,8 @@ router.get('/', async (req, res) => {
         res.status(500).send('Server Error');
     }
 });
+
+
 //POST EEN PLAYER IN DE DB 
 router.post('/', 
    // Validatie regels 
