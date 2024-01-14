@@ -36,14 +36,33 @@ router.post('/',
     body('voornaam').notEmpty().withMessage('First name is required'),
     body('achternaam').notEmpty().withMessage('Last name is required'),
     body('Team').notEmpty().withMessage('Team is required'),
-    body('geboortedatum').notEmpty().withMessage('Birthdate is required'),
-    body('ppg').isNumeric().withMessage('PPG must be a number'),
-    body('apg').isNumeric().withMessage('APG must be a number'),
-    body('rpg').isNumeric().withMessage('RPG must be a number'),
+    body('geboortedatum').notEmpty().withMessage('Birthdate is required')
+                .isDate().withMessage('Birthdate must be a date'),
+    body('ppg').isNumeric().withMessage('PPG must be a number')
+        .custom((value) => {
+          if (value < 0) {
+            throw new Error('PPG cannot be less than 0');
+          }
+          return true;
+          }),
+    body('apg').isNumeric().withMessage('APG must be a number')
+        .custom((value) => {
+          if (value < 0) {
+            throw new Error('APG cannot be less than 0');
+          }
+          return true;
+          }),
+    body('rpg').isNumeric().withMessage('RPG must be a number')
+          .custom((value) => {
+          if (value < 0) {
+            throw new Error('RPG cannot be less than 0');
+          }
+          return true;
+          }),
     body('minpg').isNumeric().withMessage('MINPG must be a number'),
   ],
     async(req,res)=>{
-         // Check for validation errors
+         // Check voor validatie errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -89,7 +108,7 @@ router.put('/:id',
     body('minpg').isNumeric().withMessage('MINPG must be a number'),
   ],
   async(req,res)=>{
-    // Check vooe validatie errors
+    // Check voor validatie errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -121,8 +140,6 @@ router.delete('/:id', async(req,res)=>{
       res.status(500).send('Server Error');
     }
 })
-
-
 //GET spelers obv teamnaam 
 router.get('/search/team/:team', async (req,res)=>{
   const teamName = req.params.team;
