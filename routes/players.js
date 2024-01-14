@@ -123,4 +123,21 @@ router.delete('/:id', async(req,res)=>{
 })
 
 
+//GET spelers obv teamnaam 
+router.get('/search/team/:team', async (req,res)=>{
+  const teamName = req.params.team;
+  try{
+    const [rows] = await req.mysql.execute(`
+    SELECT players.*
+    FROM players
+    INNER JOIN teams ON players.Team = teams.teamName
+    WHERE teams.teamName = ?
+    `,[teamName]);
+    res.json(rows);
+  }catch(err){
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 export default router; // export router
